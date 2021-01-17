@@ -9,18 +9,23 @@ exports.create = async function(req, res, next) {
         });
     }
 
+    console.log(req.body)
+    //console.log(req.body.country_name)
+    
     // Add a country
     const country = new Country({
         //email: req.body.email,
         //name: req.body.name,
         //active: req.body.active
-        country_name: req.body.country_name
+        name: req.body.country_name
     });
     
     try {
         res.json(await Country.create(country));
+        console.log("Adding new country "+country.name);
     } catch (err) {
-        console.error('Error while getting the clients ', err.message);
+        console.error('Error while adding the countries ', err.message);
+        res.json({message: "Failed: Error while adding the countries"});
         next(err);
     }
 };
@@ -30,21 +35,24 @@ exports.findAll = async function(req, res, next) {
     try {
         res.json(await Country.getAll());
     } catch (err) {
-        console.error('Error while getting the clients ', err.message);
+        console.error('Error while getting the countries', err.message);
+        res.json({message: "Failed: Error while getting the countries"});
         next(err);
     }
 };
-/*router.get('/', async function(req, res, next) {
+// Find a single country with a ountryId
+exports.findOne = async function(req, res, next) {
     try {
-        res.json(await client.getclients());
+        res.json(await Country.findById(req.params.countryId));
     } catch (err) {
-        console.error('Error while getting the clients ', err.message);
+        console.error('Error while getting the country with country id '+req.params.country_id, err.message);
+        res.json({message: "Failed: Error while getting the country with country id "+req.params.country_id});
         next(err);
-      }
-});*/
+    }
+};
 
-// Create and Save a new Customer
-/*exports.create = (req, res) => {
+// Update a country identified by the countryId in the request
+exports.update = async function(req, res, next) {
     // Validate request
     if (!req.body) {
         res.status(400).send({
@@ -52,66 +60,29 @@ exports.findAll = async function(req, res, next) {
         });
     }
 
-    // Create a Customer
+    console.log(req.body)
+    
+    // Add a country
     const country = new Country({
-        //email: req.body.email,
-        //name: req.body.name,
-        //active: req.body.active
-        name: req.body.name
+        name: req.body.country_name
     });
-
-    // Save Customer in the database
-    Country.create(country, (err, data) => {
-        if (err)
-        res.status(500).send({
-            message:
-            err.message || "Some error occurred while creating the Customer."
-        });
-        else res.send(data);
-    });
-};*/
-
-// Retrieve all Customers from the database.
-/*exports.findAll = (req, res) => {
-    Country.getAll((err, data) => {
-        if (err) {
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while retrieving customers."
-          });
-        }
-        else {
-            //check if the query is returning the country data
-            if (data.length==0) {
-                //the query did not return any results
-                data.message = "Error: No countries found";
-                console.log(data);
-            }
-            else {
-                //do here if there are client data
-            }
-            res.send(data);
-        }
-    });
-};*/
-/*
-// Find a single Customer with a customerId
-exports.findOne = (req, res) => {
-  
-};
-
-// Update a Customer identified by the customerId in the request
-exports.update = (req, res) => {
-  
+    
+    try {
+        res.json(await Country.updateById(req.params.countryId, country));
+        console.log("Adding new country "+country.name);
+    } catch (err) {
+        console.error('Error while updating the country with country id '+req.params.country_id, err.message);
+        res.json({message: "Failed: Error while updating the country with country id "+req.params.country_id});
+        next(err);
+    }
 };
 
 // Delete a Customer with the specified customerId in the request
-exports.delete = (req, res) => {
+//exports.delete = (req, res) => {
   
-};
+//};
 
 // Delete all Customers from the database.
-exports.deleteAll = (req, res) => {
+//exports.deleteAll = (req, res) => {
   
-};
-*/
+//};

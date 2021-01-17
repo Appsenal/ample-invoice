@@ -8,24 +8,17 @@ router.post("/", countries.create);
 
 // Retrieve all Countries
 router.get("/", countries.findAll);
-
-
-  // Create a new Customer
-  //app.post("/countries", countries.create);
   
-  // Retrieve all Customers
-  //app.get("/countries", countries.findAll);
+// Retrieve a single country with countryId
+router.get("/:countryId", countries.findOne);
 
-  // Retrieve a single Customer with customerId
-  //app.get("/countries/:countryId", countries.findOne);
-
-  // Update a Customer with customerId
-  //app.put("/countries/:countryId", countries.update);
+// Update a Customer with customerId
+router.put("/:countryId", countries.update);
 
   // Delete a Customer with customerId
   //app.delete("/countries/:countryId", countries.delete);
 
-  // Create a new Customer
+  // Delete all Customer
   //app.delete("/countries", countries.deleteAll);
 
 module.exports = router;
