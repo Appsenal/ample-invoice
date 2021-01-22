@@ -1,4 +1,4 @@
-const Country = require("../models/country-model.js");
+const Country = require("../models/country-model");
 
 /* Add new country listing. */
 exports.create = async function(req, res, next) {
@@ -24,8 +24,8 @@ exports.create = async function(req, res, next) {
         res.json(await Country.create(country));
         console.log("Adding new country "+country.name);
     } catch (err) {
-        console.error('Error while adding the countries ', err.message);
-        res.json({message: "Failed: Error while adding the countries"});
+        console.error('Error while adding the country ', err.message);
+        res.json({message: "Failed: Error while adding the country. "+err.message});
         next(err);
     }
 };
@@ -36,17 +36,17 @@ exports.findAll = async function(req, res, next) {
         res.json(await Country.getAll());
     } catch (err) {
         console.error('Error while getting the countries', err.message);
-        res.json({message: "Failed: Error while getting the countries"});
+        res.json({message: "Failed: Error while getting the countries. "+err.message});
         next(err);
     }
 };
-// Find a single country with a ountryId
+// Find a single country with a countryId
 exports.findOne = async function(req, res, next) {
     try {
         res.json(await Country.findById(req.params.countryId));
     } catch (err) {
-        console.error('Error while getting the country with country id '+req.params.country_id, err.message);
-        res.json({message: "Failed: Error while getting the country with country id "+req.params.country_id});
+        console.error('Error while getting the country with country id '+req.params.countryId, err.message);
+        res.json({message: "Failed: Error while getting the country with country id "+req.params.countryId});
         next(err);
     }
 };
@@ -62,17 +62,17 @@ exports.update = async function(req, res, next) {
 
     console.log(req.body)
     
-    // Add a country
+    // Get country value
     const country = new Country({
         name: req.body.country_name
     });
     
     try {
         res.json(await Country.updateById(req.params.countryId, country));
-        console.log("Adding new country "+country.name);
+        console.log("Updated country id "+req.params.countryId);
     } catch (err) {
-        console.error('Error while updating the country with country id '+req.params.country_id, err.message);
-        res.json({message: "Failed: Error while updating the country with country id "+req.params.country_id});
+        console.error('Error while updating the country with country id '+req.params.countryId, err.message);
+        res.json({message: "Failed: Error while updating the country with country id "+req.params.countryId});
         next(err);
     }
 };

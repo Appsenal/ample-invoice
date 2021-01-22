@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 //const client = require('../models/country-model');
-const countries = require("../controllers/country-controller.js");
+const countries = require("../controllers/country-controller");
 
 // Add a new Country
 router.post("/", countries.create);
@@ -12,7 +12,7 @@ router.get("/", countries.findAll);
 // Retrieve a single country with countryId
 router.get("/:countryId", countries.findOne);
 
-// Update a Customer with customerId
+// Update a country with countryId
 router.put("/:countryId", countries.update);
 
   // Delete a Customer with customerId

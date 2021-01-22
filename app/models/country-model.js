@@ -33,7 +33,7 @@ Country.getAll = async function getcountries() {
   //check if the query is returning the client data
   if (data.length==0) {
     //the query did not return any results
-    meta.message = "Error: countries not found found";
+    meta.message = "Error: countries not found";
   }
   else {
     //do here if there are client data
@@ -52,7 +52,7 @@ Country.findById = async function getcountrybyid(countryId) {
   //check if the query is returning the client data
   if (data.length==0) {
     //the query did not return any results
-    meta.message = "Error: country not found found";
+    meta.message = "Error: country not found";
   }
   else {
     //do here if there are client data
