@@ -8,6 +8,7 @@ const indexRouter = require('./app/routes/index');
 const clientRouter = require('./app/routes/client');
 const countryRouter = require('./app/routes/country');
 const provinceRouter = require('./app/routes/province');
+const cityRouter = require('./app/routes/city');
 
 const app = express();
 
@@ -22,5 +23,6 @@ app.use('/', indexRouter);
 app.use('/clients', clientRouter);
 app.use('/countries', countryRouter);
 app.use('/provinces', provinceRouter);
+app.use('/cities', cityRouter);
 
 module.exports = app;
