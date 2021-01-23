@@ -9,6 +9,7 @@ const clientRouter = require('./app/routes/client');
 const countryRouter = require('./app/routes/country');
 const provinceRouter = require('./app/routes/province');
 const cityRouter = require('./app/routes/city');
+const contactTypeRouter = require('./app/routes/contact_type');
 
 const app = express();
 
@@ -24,5 +25,6 @@ app.use('/clients', clientRouter);
 app.use('/countries', countryRouter);
 app.use('/provinces', provinceRouter);
 app.use('/cities', cityRouter);
+app.use('/contact-types', contactTypeRouter);
 
 module.exports = app;
