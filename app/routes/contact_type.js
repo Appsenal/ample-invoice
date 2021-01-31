@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const contactType = require("../controllers/contacttype-controller");
+const contactType = require("../controllers/contact-type-controller");
 
 // Add a new contact type
 router.post("/", contactType.Create);

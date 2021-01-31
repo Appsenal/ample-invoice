@@ -1,25 +1,26 @@
 const express = require('express');
 const router = express.Router();
-const client = require('../models/client');
+const client = require("../controllers/client-controller");
 
-/* GET clients listing. */
-router.get('/', async function(req, res, next) {
-    try {
-        res.json(await client.getclients());
-    } catch (err) {
-        console.error('Error while getting the clients ', err.message);
-        next(err);
-      }
-});
+// Add a new client
+router.post("/", client.Create);
 
-/* GET clients listing. */
-/*router.get('/', async function(req, res, next) {
-    try {
-        res.json(await client.getclients());
-    } catch (err) {
-        console.error('Error while getting the clients ', err.message);
-        next(err);
-      }
-});*/
+// Retrieve all clients
+router.get("/", client.GetAll);
+  
+// Retrieve a single contact type with contact type Id
+router.get("/id/:clientId", client.GetById);
+
+// Retrieve a single contact type with contact type Name
+router.get("/name/:clientName", client.GetByName);
+
+// Update a country with countryId
+router.put("/:clientId", client.EditById);
+
+  // Delete a Customer with customerId
+  //app.delete("/countries/:countryId", countries.delete);
+
+  // Delete all Customer
+  //app.delete("/countries", countries.deleteAll);
 
 module.exports = router;

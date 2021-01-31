@@ -28,13 +28,13 @@ ContactType.SelectAll = async function selectallcontacttypes() {
     const data = await db.query("SELECT * FROM invoice.contact_type");
     const meta = {message: "success"};
   
-    //check if the query is returning the client data
+    //check if the query is returning the contact type data
     if (data.length==0) {
       //the query did not return any results
       meta.message = "Error: Contact type not found";
     }
     else {
-      //do here if there are client data
+      //do here if there are contact type data
     }
   
     return {

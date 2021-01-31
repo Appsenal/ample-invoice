@@ -1,4 +1,4 @@
-const ContactType = require("../models/contacttype-model");
+const ContactType = require("../models/contact-type-model");
 
 /* Add new contact type. */
 exports.Create = async function(req, res, next) {
