@@ -2,19 +2,19 @@ const express = require('express');
 const router = express.Router();
 const ProductStatus = require("../controllers/product-status-controller");
 
-// Add a new contact type
+// Add a new product status
 router.post("/", ProductStatus.Create);
 
-// Retrieve all contact types
+// Retrieve all product statuses
 router.get("/", ProductStatus.GetAll);
   
-// Retrieve a single contact type with contact type Id
+// Retrieve a single product status with product status Id
 router.get("/id/:productStatusId", ProductStatus.GetById);
 
-// Retrieve a single contact type with contact type Name
+// Retrieve a single product status with product status Name
 router.get("/name/:productStatusName", ProductStatus.GetByName);
 
-// Update a country with countryId
+// Update a product status with product status Id
 router.put("/:productStatusId", ProductStatus.EditById);
 
   // Delete a Customer with customerId

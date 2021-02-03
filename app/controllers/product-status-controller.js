@@ -1,6 +1,6 @@
 const ProductStatus = require("../models/product-status-model");
 
-/* Add new contact type. */
+/* Add new product status. */
 exports.Create = async function(req, res, next) {
     // Validate request 
     if (!req.body) {
@@ -38,7 +38,7 @@ exports.GetAll = async function(req, res, next) {
     }
 };
 
-// Find a contact type with a product status id
+// Find a product status with a product status id
 exports.GetById = async function(req, res, next) {
     try {
         res.json(await ProductStatus.SelectById(req.params.productStatusId));
@@ -49,7 +49,7 @@ exports.GetById = async function(req, res, next) {
     }
 };
 
-// Find a contact type with a product status id
+// Find a product status with a product status id
 exports.GetByName = async function(req, res, next) {
     try {
         res.json(await ProductStatus.SelectByName(req.params.productStatusName));
@@ -60,7 +60,7 @@ exports.GetByName = async function(req, res, next) {
     }
 };
 
-// Update a country identified by the countryId in the request
+// Update a product status identified by the product status Id in the request
 exports.EditById = async function(req, res, next) {
     // Validate request
     if (!req.body) {
