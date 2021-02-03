@@ -7,7 +7,7 @@ const ContactType = function(contactType) {
 
 ContactType.Insert = async function insertcontactype(contactType) {
     const meta = {message: "Success! New contact type, "+contactType.name+" has been added."};
-    //Query to determine if the province name is a duplicate or not
+    //Query to determine if the contact type name is a duplicate or not
     data = await db.query("SELECT * FROM invoice.contact_type WHERE contact_type_name = ?", [contactType.name]);
     if (data.length==0) {
         data = await db.query("INSERT INTO invoice.contact_type (contact_type_name, contact_type_desc) VALUES (?, ?)", [contactType.name, contactType.description]);
@@ -47,13 +47,13 @@ ContactType.SelectById = async function selectcontacttypebyid(contactTypeId) {
     const data = await db.query("SELECT * FROM invoice.contact_type WHERE contact_type_id = ?", [contactTypeId]);
     const meta = {message: "success"};
   
-    //check if the query is returning the client data
+    //check if the query is returning the contact type data
     if (data.length==0) {
       //the query did not return any results
       meta.message = "Error: Contact type not found";
     }
     else {
-      //do here if there are client data
+      //do here if there are contact type data
     }
   
     return {
@@ -66,13 +66,13 @@ ContactType.SelectByName = async function selectcontacttypebyname(contactTypeNam
     const data = await db.query("SELECT * FROM invoice.contact_type WHERE contact_type_name = ?", [contactTypeName]);
     const meta = {message: "success"};
   
-    //check if the query is returning the client data
+    //check if the query is returning the contact type
     if (data.length==0) {
       //the query did not return any results
       meta.message = "Error: Contact type not found";
     }
     else {
-      //do here if there are client data
+      //do here if there are contact type
     }
   
     return {
@@ -86,7 +86,6 @@ ContactType.UpdateById = async function updatecontacttypebyid(contactTypeId, con
     var setName = "";
     var setDesc = "";
     if (contactType.name) {
-      //console.log("no province");
       setName = "contact_type_name = "+db.escape(contactType.name);
     }
     if (contactType.description) {
@@ -98,13 +97,13 @@ ContactType.UpdateById = async function updatecontacttypebyid(contactTypeId, con
     const data = await db.query(queryTxt+setName+setDesc+" WHERE contact_type_id = ?", [contactTypeId]);
     const meta = {message: "success"};
   
-    //check if the query is returning the country data
+    //check if the query is returning the contact type data
     if (data.length==0) {
       //the query did not return any results
       meta.message = "Error: Contact Type not found found";
     }
     else {
-      //do here if there are country data
+      //do here if there are contact type data
     }
   
     return {
