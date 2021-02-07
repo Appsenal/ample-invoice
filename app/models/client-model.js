@@ -6,7 +6,7 @@ const Client = function(client) {
 };
 
 Client.Insert = async function insertclient(client) {
-    const meta = {message: "Success! New client, "+client.name+" has been added."};
+    const meta = {return_code: 0, message: "Success! New client, "+client.name+" has been added."};
     const data = await db.query("INSERT INTO invoice.client (client_name, client_gender) VALUES (?, ?)", [client.name, client.gender]);
 
     return {
@@ -17,12 +17,13 @@ Client.Insert = async function insertclient(client) {
 
 Client.SelectAll = async function selectallclient() {
     const data = await db.query("SELECT * FROM invoice.client");
-    const meta = {message: "success"};
+    const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client data
     if (data.length==0) {
       //the query did not return any results
       meta.message = "Error: Client not found";
+      meta.return_code = 1;
     }
     else {
       //do here if there are client data
@@ -36,12 +37,13 @@ Client.SelectAll = async function selectallclient() {
 
 Client.SelectById = async function selectclientbyid(clientId) {
     const data = await db.query("SELECT * FROM invoice.client WHERE client_id = ?", [clientId]);
-    const meta = {message: "success"};
+    const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client data
     if (data.length==0) {
       //the query did not return any results
       meta.message = "Error: Client not found";
+      meta.return_code = 1;
     }
     else {
       //do here if there are client data
@@ -55,12 +57,13 @@ Client.SelectById = async function selectclientbyid(clientId) {
 
 Client.SelectByName = async function selectclientbyname(clientName) {
     const data = await db.query("SELECT * FROM invoice.client WHERE client_name LIKE ?", [clientName]);
-    const meta = {message: "success"};
+    const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client data
     if (data.length==0) {
       //the query did not return any results
       meta.message = "Error: Client not found";
+      meta.return_code = 1;
     }
     else {
       //do here if there are client data
@@ -86,12 +89,13 @@ Client.UpdateById = async function updateclientbyid(clientId, client) {
     console.log(queryTxt+setName+setGender+" WHERE client_id = ?");
     
     const data = await db.query(queryTxt+setName+setGender+" WHERE client_id = ?", [clientId]);
-    const meta = {message: "success"};
+    const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client data
     if (data.length==0) {
       //the query did not return any results
       meta.message = "Error: Client not found found";
+      meta.return_code = 1;
     }
     else {
       //do here if there are client data

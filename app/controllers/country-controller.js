@@ -5,7 +5,8 @@ exports.create = async function(req, res, next) {
     // Validate request
     if (!req.body) {
         res.status(400).send({
-        message: "Content can not be empty!"
+            return_code: 1,
+            message: "Content can not be empty!"
         });
     }
 
@@ -25,7 +26,7 @@ exports.create = async function(req, res, next) {
         console.log("Adding new country "+country.name);
     } catch (err) {
         console.error('Error while adding the country ', err.message);
-        res.json({message: "Failed: Error while adding the country. "+err.message});
+        res.json({return_code: 1, message: "Failed: Error while adding the country. "+err.message});
         next(err);
     }
 };
@@ -36,17 +37,17 @@ exports.findAll = async function(req, res, next) {
         res.json(await Country.getAll());
     } catch (err) {
         console.error('Error while getting the countries', err.message);
-        res.json({message: "Failed: Error while getting the countries. "+err.message});
+        res.json({return_code: 1, message: "Failed: Error while getting the countries. "+err.message});
         next(err);
     }
 };
 // Find a single country with a countryId
 exports.findOne = async function(req, res, next) {
     try {
-        res.json(await Country.findById(req.params.countryId));
+        res.json(await Country.SelectById(req.params.countryId));
     } catch (err) {
         console.error('Error while getting the country with country id '+req.params.countryId, err.message);
-        res.json({message: "Failed: Error while getting the country with country id "+req.params.countryId});
+        res.json({return_code: 1, message: "Failed: Error while getting the country with country id "+req.params.countryId});
         next(err);
     }
 };
@@ -56,7 +57,8 @@ exports.update = async function(req, res, next) {
     // Validate request
     if (!req.body) {
         res.status(400).send({
-        message: "Content can not be empty!"
+            return_code: 1, 
+            message: "Content can not be empty!"
         });
     }
 
@@ -72,7 +74,7 @@ exports.update = async function(req, res, next) {
         console.log("Updated country id "+req.params.countryId);
     } catch (err) {
         console.error('Error while updating the country with country id '+req.params.countryId, err.message);
-        res.json({message: "Failed: Error while updating the country with country id "+req.params.countryId});
+        res.json({return_code: 1, message: "Failed: Error while updating the country with country id "+req.params.countryId});
         next(err);
     }
 };

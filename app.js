@@ -10,9 +10,10 @@ const countryRouter = require('./app/routes/country');
 const provinceRouter = require('./app/routes/province');
 const cityRouter = require('./app/routes/city');
 const contactTypeRouter = require('./app/routes/contact_type');
-const clientContact = require('./app/routes/client-contact');
-const productStatus = require('./app/routes/product-status');
-const productParent = require('./app/routes/product-parent');
+const clientContactRouter = require('./app/routes/client-contact');
+const productStatusRouter = require('./app/routes/product-status');
+const productParentRouter = require('./app/routes/product-parent');
+const clientAddressRouter = require('./app/routes/client-address');
 
 const app = express();
 
@@ -29,8 +30,9 @@ app.use('/countries', countryRouter);
 app.use('/provinces', provinceRouter);
 app.use('/cities', cityRouter);
 app.use('/contact-types', contactTypeRouter);
-app.use('/client-contacts', clientContact);
-app.use('/product-status', productStatus);
-app.use('/product-parents', productParent);
+app.use('/client-contacts', clientContactRouter);
+app.use('/product-status', productStatusRouter);
+app.use('/product-parents', productParentRouter);
+app.use('/client-address', clientAddressRouter);
 
 module.exports = app;

@@ -5,7 +5,7 @@ exports.Create = async function(req, res, next) {
     // Validate request 
     if (!req.body) {
         res.status(400).send({
-        message: "Content can not be empty!"
+            return_code: 1, message: "Content can not be empty!"
         });
     }
 
@@ -22,7 +22,7 @@ exports.Create = async function(req, res, next) {
         console.log("Adding new client "+client.name);
     } catch (err) {
         console.error('Error while adding the client ', err.message);
-        res.json({message: "Failed: Error while adding the client"});
+        res.json({return_code: 1, message: "Failed: Error while adding the client"});
         next(err);
     }
 };
@@ -33,7 +33,7 @@ exports.GetAll = async function(req, res, next) {
         res.json(await Client.SelectAll());
     } catch (err) {
         console.error('Error while getting the clients', err.message);
-        res.json({message: "Failed: Error while getting the clients. "+err.message});
+        res.json({return_code: 1, message: "Failed: Error while getting the clients. "+err.message});
         next(err);
     }
 };
@@ -44,7 +44,7 @@ exports.GetById = async function(req, res, next) {
         res.json(await Client.SelectById(req.params.clientId));
     } catch (err) {
         console.error('Error while getting the client with client id '+req.params.clientId, err.message);
-        res.json({message: "Failed: Error while getting the client with client id "+req.params.clientId});
+        res.json({return_code: 1, message: "Failed: Error while getting the client with client id "+req.params.clientId});
         next(err);
     }
 };
@@ -55,23 +55,23 @@ exports.GetByName = async function(req, res, next) {
         res.json(await Client.SelectByName(req.params.clientName));
     } catch (err) {
         console.error('Error while getting the client with client name '+req.params.clientName, err.message);
-        res.json({message: "Failed: Error while getting the client with client name "+req.params.clientName});
+        res.json({return_code: 1, message: "Failed: Error while getting the client with client name "+req.params.clientName});
         next(err);
     }
 };
 
-// Update a country identified by the countryId in the request
+// Update a client identified by the client Id in the request
 exports.EditById = async function(req, res, next) {
     // Validate request
     if (!req.body) {
         res.status(400).send({
-        message: "Content can not be empty!"
+            return_code: 1, message: "Content can not be empty!"
         });
     }
 
     console.log(req.body)
     
-    // Get a city values
+    // Get a client values
     const client = new Client({
         name: req.body.client_name,
         gender: req.body.client_gender
@@ -82,7 +82,7 @@ exports.EditById = async function(req, res, next) {
         console.log("Updated client id "+req.params.clientId);
     } catch (err) {
         console.error('Error while updating the client with client id '+req.params.clientId, err.message);
-        res.json({message: "Failed: Error while updating the client with client id "+req.params.clientId});
+        res.json({return_code: 1, message: "Failed: Error while updating the client with client id "+req.params.clientId});
         next(err);
     }
 };

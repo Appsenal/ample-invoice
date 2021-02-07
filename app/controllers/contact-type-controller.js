@@ -60,7 +60,7 @@ exports.GetByName = async function(req, res, next) {
     }
 };
 
-// Update a country identified by the countryId in the request
+// Update a contact type identified by the contact type Id in the request
 exports.EditById = async function(req, res, next) {
     // Validate request
     if (!req.body) {

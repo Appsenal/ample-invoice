@@ -10,11 +10,12 @@ const Province = function(province) {
 Province.create = async function addprovince(province) {
     //Query the country provided if existing
     var data = await db.query("SELECT * FROM invoice.country WHERE country_id = ?", [province.countryId]);
-    const meta = {message: "Success! New province, "+province.name+" has been added."};
+    const meta = {return_code: 0, message: "Success! New province, "+province.name+" has been added."};
     //check if the query is returning the country data
     if (data.length==0) {
         //the query did not return any results
         meta.message = "Failure: Country does not exists.";
+        meta.return_code = 1;
     }
     else {
         //do here if there are country data
@@ -26,6 +27,7 @@ Province.create = async function addprovince(province) {
         else {
           //the query did not return any results
           meta.message = "Failure: Duplicate province.";
+          meta.return_code = 1;
         }
     }
 
@@ -37,12 +39,13 @@ Province.create = async function addprovince(province) {
 
 Province.getAll = async function getallprovince() {
   const data = await db.query("SELECT * FROM invoice.province p JOIN invoice.country c ON p.country_id=c.country_id");
-  const meta = {message: "success"};
+  const meta = {return_code: 0, message: "success"};
 
   //check if the query is returning the client data
   if (data.length==0) {
     //the query did not return any results
     meta.message = "Error: provinces not found";
+    meta.return_code = 1;
   }
   else {
     //do here if there are client data
@@ -54,14 +57,15 @@ Province.getAll = async function getallprovince() {
   }
 }
 
-Province.selectById = async function getprovincebyid(provinceId) {
+Province.SelectById = async function getprovincebyid(provinceId) {
   const data = await db.query("SELECT * FROM invoice.province p JOIN invoice.country c ON p.country_id=c.country_id WHERE p.province_id = ?", [provinceId]);
-  const meta = {message: "success"};
+  const meta = {return_code: 0, message: "success"};
 
   //check if the query is returning the client data
   if (data.length==0) {
     //the query did not return any results
     meta.message = "Error: province not found";
+    meta.return_code = 1;
   }
   else {
     //do here if there are client data
@@ -75,12 +79,13 @@ Province.selectById = async function getprovincebyid(provinceId) {
 
 Province.selectByName = async function getprovincebyname(provinceName) {
   const data = await db.query("SELECT * FROM invoice.province p JOIN invoice.country c ON p.country_id=c.country_id WHERE p.province_name = ?", [provinceName]);
-  const meta = {message: "success"};
+  const meta = {return_code: 0, message: "success"};
 
   //check if the query is returning the client data
   if (data.length==0) {
     //the query did not return any results
     meta.message = "Error: province not found";
+    meta.return_code = 1;
   }
   else {
     //do here if there are client data
@@ -94,12 +99,13 @@ Province.selectByName = async function getprovincebyname(provinceName) {
 
 Province.selectByCountryId = async function getprovincebycountryid(countryid) {
   const data = await db.query("SELECT * FROM invoice.province p JOIN invoice.country c ON p.country_id=c.country_id  WHERE p.country_id = ?", [countryid]);
-  const meta = {message: "success"};
+  const meta = {return_code: 0, message: "success"};
 
   //check if the query is returning the client data
   if (data.length==0) {
     //the query did not return any results
     meta.message = "Error: province not found";
+    meta.return_code = 1;
   }
   else {
     //do here if there are client data
@@ -113,12 +119,13 @@ Province.selectByCountryId = async function getprovincebycountryid(countryid) {
 
 Province.selectByCountryName = async function getprovincebycountryname(countryname) {
   const data = await db.query("SELECT * FROM invoice.province p JOIN invoice.country c ON p.country_id=c.country_id  WHERE c.country_name = ?", [countryname]);
-  const meta = {message: "success"};
+  const meta = {return_code: 0, message: "success"};
 
   //check if the query is returning the client data
   if (data.length==0) {
     //the query did not return any results
     meta.message = "Error: province not found";
+    meta.return_code = 1;
   }
   else {
     //do here if there are client data
@@ -145,12 +152,13 @@ Province.updateById = async function updateprovincebyid(provinceId, province) {
   console.log(queryTxt+setProvinceName+setCountryId+" WHERE province_id = ?");
   //const data = await db.query("UPDATE invoice.province SET province_name = ?, country_id = ? WHERE province_id = ?", [province.name, province.countryId, provinceId]);
   const data = await db.query(queryTxt+setProvinceName+setCountryId+" WHERE province_id = ?", [provinceId]);
-  const meta = {message: "success"};
+  const meta = {return_code: 0, message: "success"};
 
   //check if the query is returning the country data
   if (data.length==0) {
     //the query did not return any results
     meta.message = "Error: province not found found";
+    meta.return_code = 1;
   }
   else {
     //do here if there are country data

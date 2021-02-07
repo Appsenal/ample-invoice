@@ -5,7 +5,7 @@ exports.create = async function(req, res, next) {
     // Validate request 
     if (!req.body) {
         res.status(400).send({
-        message: "Content can not be empty!"
+            return_code: 1, message: "Content can not be empty!"
         });
     }
 
@@ -22,7 +22,7 @@ exports.create = async function(req, res, next) {
         console.log("Adding new province "+province.name);
     } catch (err) {
         console.error('Error while adding the province ', err.message);
-        res.json({message: "Failed: Error while adding the province"});
+        res.json({return_code: 1, message: "Failed: Error while adding the province"});
         next(err);
     }
 };
@@ -33,7 +33,7 @@ exports.findAll = async function(req, res, next) {
         res.json(await Province.getAll());
     } catch (err) {
         console.error('Error while getting the provinces', err.message);
-        res.json({message: "Failed: Error while getting the provinces. "+err.message});
+        res.json({return_code: 1, message: "Failed: Error while getting the provinces. "+err.message});
         next(err);
     }
 };
@@ -41,10 +41,10 @@ exports.findAll = async function(req, res, next) {
 // Find a province with a provinceId
 exports.GetById = async function(req, res, next) {
     try {
-        res.json(await Province.selectById(req.params.provinceId));
+        res.json(await Province.SelectById(req.params.provinceId));
     } catch (err) {
         console.error('Error while getting the province with province id '+req.params.provinceId, err.message);
-        res.json({message: "Failed: Error while getting the province with province id "+req.params.provinceId});
+        res.json({return_code: 1, message: "Failed: Error while getting the province with province id "+req.params.provinceId});
         next(err);
     }
 };
@@ -55,7 +55,7 @@ exports.GetByName = async function(req, res, next) {
         res.json(await Province.selectByName(req.params.provinceName));
     } catch (err) {
         console.error('Error while getting the province with province name '+req.params.provinceName, err.message);
-        res.json({message: "Failed: Error while getting the province with province name "+req.params.provinceName});
+        res.json({return_code: 1, message: "Failed: Error while getting the province with province name "+req.params.provinceName});
         next(err);
     }
 };
@@ -66,7 +66,7 @@ exports.GetByCountryId = async function(req, res, next) {
         res.json(await Province.selectByCountryId(req.params.countryId));
     } catch (err) {
         console.error('Error while getting the province with country id '+req.params.countryId, err.message);
-        res.json({message: "Failed: Error while getting the province with country id "+req.params.countryId});
+        res.json({return_code: 1, message: "Failed: Error while getting the province with country id "+req.params.countryId});
         next(err);
     }
 };
@@ -77,7 +77,7 @@ exports.GetByCountryName = async function(req, res, next) {
         res.json(await Province.selectByCountryName(req.params.countryName));
     } catch (err) {
         console.error('Error while getting the province with country name '+req.params.countryName, err.message);
-        res.json({message: "Failed: Error while getting the province with country name "+req.params.countryName});
+        res.json({return_code: 1, message: "Failed: Error while getting the province with country name "+req.params.countryName});
         next(err);
     }
 };
@@ -90,7 +90,7 @@ exports.updateById = async function(req, res, next) {
     // Validate request
     if (!req.body) {
         res.status(400).send({
-        message: "Content can not be empty!"
+            return_code: 1, message: "Content can not be empty!"
         });
     }
     //else {
@@ -113,7 +113,7 @@ exports.updateById = async function(req, res, next) {
         console.log("Updated province id "+req.params.provinceId);
     } catch (err) {
         console.error('Error while updating the province with province id '+req.params.provinceId, err.message);
-        res.json({message: "Failed: Error while updating the province with province id "+req.params.provinceId});
+        res.json({return_code: 1, message: "Failed: Error while updating the province with province id "+req.params.provinceId});
         next(err);
     }
 };
