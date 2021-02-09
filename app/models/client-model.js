@@ -7,7 +7,7 @@ const Client = function(client) {
 
 Client.Insert = async function insertclient(client) {
     const meta = {return_code: 0, message: "Success! New client, "+client.name+" has been added."};
-    const data = await db.query("INSERT INTO invoice.client (client_name, client_gender) VALUES (?, ?)", [client.name, client.gender]);
+    const data = await db.query("INSERT INTO client (client_name, client_gender) VALUES (?, ?)", [client.name, client.gender]);
 
     return {
       data,
@@ -16,7 +16,7 @@ Client.Insert = async function insertclient(client) {
 }
 
 Client.SelectAll = async function selectallclient() {
-    const data = await db.query("SELECT * FROM invoice.client");
+    const data = await db.query("SELECT * FROM client");
     const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client data
@@ -36,7 +36,7 @@ Client.SelectAll = async function selectallclient() {
 }
 
 Client.SelectById = async function selectclientbyid(clientId) {
-    const data = await db.query("SELECT * FROM invoice.client WHERE client_id = ?", [clientId]);
+    const data = await db.query("SELECT * FROM client WHERE client_id = ?", [clientId]);
     const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client data
@@ -56,7 +56,7 @@ Client.SelectById = async function selectclientbyid(clientId) {
 }
 
 Client.SelectByName = async function selectclientbyname(clientName) {
-    const data = await db.query("SELECT * FROM invoice.client WHERE client_name LIKE ?", [clientName]);
+    const data = await db.query("SELECT * FROM client WHERE client_name LIKE ?", [clientName]);
     const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client data
@@ -76,7 +76,7 @@ Client.SelectByName = async function selectclientbyname(clientName) {
 }
 
 Client.UpdateById = async function updateclientbyid(clientId, client) {
-    var queryTxt = "UPDATE invoice.client SET ";
+    var queryTxt = "UPDATE client SET ";
     var setName = "";
     var setGender = "";
     if (client.name) {

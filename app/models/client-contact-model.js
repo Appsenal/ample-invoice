@@ -9,7 +9,7 @@ const ClientContact = function(clientcontact) {
 ClientContact.Insert = async function insertclientcontact(clientcontact) {
     const meta = {message: "Success! New client contact, "+clientcontact.contactValue+" has been added."};
     //const data = {test: "test"};
-    data = await db.query("INSERT INTO invoice.client_contact (client_id, contact_type_id, contact_value) VALUES (?, ?, ?)", [clientcontact.clientId, clientcontact.contactTypeId, clientcontact.contactValue]);
+    data = await db.query("INSERT INTO client_contact (client_id, contact_type_id, contact_value) VALUES (?, ?, ?)", [clientcontact.clientId, clientcontact.contactTypeId, clientcontact.contactValue]);
 
     return {
       data,
@@ -18,7 +18,7 @@ ClientContact.Insert = async function insertclientcontact(clientcontact) {
 }
 
 ClientContact.SelectAll = async function selectallclientcontact() {
-    const data = await db.query("SELECT * FROM invoice.client_contact cc JOIN invoice.client c ON c.client_id=cc.client_id JOIN invoice.contact_type ct ON ct.contact_type_id=cc.contact_type_id");
+    const data = await db.query("SELECT * FROM client_contact cc JOIN client c ON c.client_id=cc.client_id JOIN contact_type ct ON ct.contact_type_id=cc.contact_type_id");
     const meta = {message: "success"};
   
     //check if the query is returning the client data
@@ -37,7 +37,7 @@ ClientContact.SelectAll = async function selectallclientcontact() {
 }
 
 ClientContact.SelectByClientId = async function selectbyclientid(clientId) {
-  const data = await db.query("SELECT * FROM invoice.client_contact cc JOIN invoice.client c ON c.client_id=cc.client_id JOIN invoice.contact_type ct ON ct.contact_type_id=cc.contact_type_id WHERE cc.client_id = ?", [clientId]);
+  const data = await db.query("SELECT * FROM client_contact cc JOIN client c ON c.client_id=cc.client_id JOIN contact_type ct ON ct.contact_type_id=cc.contact_type_id WHERE cc.client_id = ?", [clientId]);
   const meta = {message: "success"};
 
   //check if the query is returning the client data
@@ -56,7 +56,7 @@ ClientContact.SelectByClientId = async function selectbyclientid(clientId) {
 }
 
 ClientContact.SelectByClientName = async function selectbyclientName(clientName) {
-  const data = await db.query("SELECT * FROM invoice.client_contact cc JOIN invoice.client c ON c.client_id=cc.client_id JOIN invoice.contact_type ct ON ct.contact_type_id=cc.contact_type_id WHERE c.client_name = ?", [clientName]);
+  const data = await db.query("SELECT * FROM client_contact cc JOIN client c ON c.client_id=cc.client_id JOIN contact_type ct ON ct.contact_type_id=cc.contact_type_id WHERE c.client_name = ?", [clientName]);
   const meta = {message: "success"};
 
   //check if the query is returning the client data
@@ -75,7 +75,7 @@ ClientContact.SelectByClientName = async function selectbyclientName(clientName)
 }
 
 ClientContact.UpdateById = async function updateclientcontactbyid(clientContactId, clientContact) {
-  var queryTxt = "UPDATE invoice.client_contact SET ";
+  var queryTxt = "UPDATE client_contact SET ";
   //var setClientId = "";
   //var setContactTypeId = "";
   //var contactValue = "";

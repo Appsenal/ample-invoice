@@ -7,8 +7,8 @@ const Country = function(country) {
   //this.active = customer.active;
 };
 
-Country.create = async function addcountry(country) {
-  const data = await db.query("INSERT INTO invoice.country (country_name) VALUES (?)", [country.name]);
+Country.Insert = async function addcountry(country) {
+  const data = await db.query("INSERT INTO country (country_name) VALUES (?)", [country.name]);
   const meta = {return_code: 0, message: "Success! New country, "+country.name+" has been added."};
 
   //check if the query is returning the client data
@@ -26,8 +26,8 @@ Country.create = async function addcountry(country) {
   }
 }
 
-Country.getAll = async function getcountries() {
-  const data = await db.query("SELECT * FROM invoice.country");
+Country.SelectAll = async function selectcountries() {
+  const data = await db.query("SELECT * FROM country");
   const meta = {return_code: 0, message: "success"};
 
   //check if the query is returning the client data
@@ -47,7 +47,7 @@ Country.getAll = async function getcountries() {
 }
 
 Country.SelectById = async function getcountrybyid(countryId) {
-  const data = await db.query("SELECT * FROM invoice.country WHERE country_id = ?", [countryId]);
+  const data = await db.query("SELECT * FROM country WHERE country_id = ?", [countryId]);
   const meta = {return_code: 0, message: "success"};
 
   //check if the query is returning the client data
@@ -66,8 +66,8 @@ Country.SelectById = async function getcountrybyid(countryId) {
   }
 }
 
-Country.updateById = async function updatecountrybyid(countryId, country) {
-  const data = await db.query("UPDATE invoice.country SET country_name = ? WHERE country_id = ?", [country.name, countryId]);
+Country.UpdateById = async function updatecountrybyid(countryId, country) {
+  const data = await db.query("UPDATE country SET country_name = ? WHERE country_id = ?", [country.name, countryId]);
   const meta = {return_code: 0, message: "success"};
 
   //check if the query is returning the country data

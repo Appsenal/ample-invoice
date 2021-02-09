@@ -4,16 +4,16 @@ const router = express.Router();
 const countries = require("../controllers/country-controller");
 
 // Add a new Country
-router.post("/", countries.create);
+router.post("/", countries.Create);
 
 // Retrieve all Countries
-router.get("/", countries.findAll);
+router.get("/", countries.GetAll);
   
 // Retrieve a single country with countryId
-router.get("/:countryId", countries.findOne);
+router.get("/:countryId", countries.GetById);
 
 // Update a country with countryId
-router.put("/:countryId", countries.update);
+router.put("/:countryId", countries.UpdateById);
 
   // Delete a Customer with customerId
   //app.delete("/countries/:countryId", countries.delete);

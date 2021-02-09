@@ -8,9 +8,9 @@ const ContactType = function(contactType) {
 ContactType.Insert = async function insertcontactype(contactType) {
     const meta = {message: "Success! New contact type, "+contactType.name+" has been added."};
     //Query to determine if the contact type name is a duplicate or not
-    data = await db.query("SELECT * FROM invoice.contact_type WHERE contact_type_name = ?", [contactType.name]);
+    data = await db.query("SELECT * FROM contact_type WHERE contact_type_name = ?", [contactType.name]);
     if (data.length==0) {
-        data = await db.query("INSERT INTO invoice.contact_type (contact_type_name, contact_type_desc) VALUES (?, ?)", [contactType.name, contactType.description]);
+        data = await db.query("INSERT INTO contact_type (contact_type_name, contact_type_desc) VALUES (?, ?)", [contactType.name, contactType.description]);
     }
     else {
         //the query did not return any results
@@ -25,7 +25,7 @@ ContactType.Insert = async function insertcontactype(contactType) {
 }
 
 ContactType.SelectAll = async function selectallcontacttypes() {
-    const data = await db.query("SELECT * FROM invoice.contact_type");
+    const data = await db.query("SELECT * FROM contact_type");
     const meta = {message: "success"};
   
     //check if the query is returning the contact type data
@@ -44,7 +44,7 @@ ContactType.SelectAll = async function selectallcontacttypes() {
 }
 
 ContactType.SelectById = async function selectcontacttypebyid(contactTypeId) {
-    const data = await db.query("SELECT * FROM invoice.contact_type WHERE contact_type_id = ?", [contactTypeId]);
+    const data = await db.query("SELECT * FROM contact_type WHERE contact_type_id = ?", [contactTypeId]);
     const meta = {message: "success"};
   
     //check if the query is returning the contact type data
@@ -63,7 +63,7 @@ ContactType.SelectById = async function selectcontacttypebyid(contactTypeId) {
 }
 
 ContactType.SelectByName = async function selectcontacttypebyname(contactTypeName) {
-    const data = await db.query("SELECT * FROM invoice.contact_type WHERE contact_type_name = ?", [contactTypeName]);
+    const data = await db.query("SELECT * FROM contact_type WHERE contact_type_name = ?", [contactTypeName]);
     const meta = {message: "success"};
   
     //check if the query is returning the contact type
@@ -82,7 +82,7 @@ ContactType.SelectByName = async function selectcontacttypebyname(contactTypeNam
 }
 
 ContactType.UpdateById = async function updatecontacttypebyid(contactTypeId, contactType) {
-    var queryTxt = "UPDATE invoice.contact_type SET ";
+    var queryTxt = "UPDATE contact_type SET ";
     var setName = "";
     var setDesc = "";
     if (contactType.name) {

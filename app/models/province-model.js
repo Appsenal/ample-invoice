@@ -9,7 +9,7 @@ const Province = function(province) {
 
 Province.create = async function addprovince(province) {
     //Query the country provided if existing
-    var data = await db.query("SELECT * FROM invoice.country WHERE country_id = ?", [province.countryId]);
+    var data = await db.query("SELECT * FROM country WHERE country_id = ?", [province.countryId]);
     const meta = {return_code: 0, message: "Success! New province, "+province.name+" has been added."};
     //check if the query is returning the country data
     if (data.length==0) {
@@ -20,9 +20,9 @@ Province.create = async function addprovince(province) {
     else {
         //do here if there are country data
         //Query to determine if the province name is a duplicate or not
-        data = await db.query("SELECT * FROM invoice.province WHERE province_name = ? AND country_id = ?", [province.name, province.countryId]);
+        data = await db.query("SELECT * FROM province WHERE province_name = ? AND country_id = ?", [province.name, province.countryId]);
         if (data.length==0) {
-          data = await db.query("INSERT INTO invoice.province (province_name, country_id) VALUES (?, ?)", [province.name, province.countryId]);
+          data = await db.query("INSERT INTO province (province_name, country_id) VALUES (?, ?)", [province.name, province.countryId]);
         }
         else {
           //the query did not return any results
@@ -38,7 +38,7 @@ Province.create = async function addprovince(province) {
 }
 
 Province.getAll = async function getallprovince() {
-  const data = await db.query("SELECT * FROM invoice.province p JOIN invoice.country c ON p.country_id=c.country_id");
+  const data = await db.query("SELECT * FROM province p JOIN country c ON p.country_id=c.country_id");
   const meta = {return_code: 0, message: "success"};
 
   //check if the query is returning the client data
@@ -58,7 +58,7 @@ Province.getAll = async function getallprovince() {
 }
 
 Province.SelectById = async function getprovincebyid(provinceId) {
-  const data = await db.query("SELECT * FROM invoice.province p JOIN invoice.country c ON p.country_id=c.country_id WHERE p.province_id = ?", [provinceId]);
+  const data = await db.query("SELECT * FROM province p JOIN country c ON p.country_id=c.country_id WHERE p.province_id = ?", [provinceId]);
   const meta = {return_code: 0, message: "success"};
 
   //check if the query is returning the client data
@@ -78,7 +78,7 @@ Province.SelectById = async function getprovincebyid(provinceId) {
 }
 
 Province.selectByName = async function getprovincebyname(provinceName) {
-  const data = await db.query("SELECT * FROM invoice.province p JOIN invoice.country c ON p.country_id=c.country_id WHERE p.province_name = ?", [provinceName]);
+  const data = await db.query("SELECT * FROM province p JOIN country c ON p.country_id=c.country_id WHERE p.province_name = ?", [provinceName]);
   const meta = {return_code: 0, message: "success"};
 
   //check if the query is returning the client data
@@ -98,7 +98,7 @@ Province.selectByName = async function getprovincebyname(provinceName) {
 }
 
 Province.selectByCountryId = async function getprovincebycountryid(countryid) {
-  const data = await db.query("SELECT * FROM invoice.province p JOIN invoice.country c ON p.country_id=c.country_id  WHERE p.country_id = ?", [countryid]);
+  const data = await db.query("SELECT * FROM province p JOIN country c ON p.country_id=c.country_id  WHERE p.country_id = ?", [countryid]);
   const meta = {return_code: 0, message: "success"};
 
   //check if the query is returning the client data
@@ -118,7 +118,7 @@ Province.selectByCountryId = async function getprovincebycountryid(countryid) {
 }
 
 Province.selectByCountryName = async function getprovincebycountryname(countryname) {
-  const data = await db.query("SELECT * FROM invoice.province p JOIN invoice.country c ON p.country_id=c.country_id  WHERE c.country_name = ?", [countryname]);
+  const data = await db.query("SELECT * FROM province p JOIN country c ON p.country_id=c.country_id  WHERE c.country_name = ?", [countryname]);
   const meta = {return_code: 0, message: "success"};
 
   //check if the query is returning the client data
@@ -138,7 +138,7 @@ Province.selectByCountryName = async function getprovincebycountryname(countryna
 }
 
 Province.updateById = async function updateprovincebyid(provinceId, province) {
-  var queryTxt = "UPDATE invoice.province SET ";
+  var queryTxt = "UPDATE province SET ";
   var setProvinceName = "";
   var setCountryId = "";
   if (province.name) {

@@ -6,15 +6,16 @@ const ProductParent = function(productParent) {
 };
 
 ProductParent.Insert = async function insertproductparent(productParent) {
-    const meta = {message: "Success! New product parent, "+productParent.name+" has been added."};
+    const meta = {return_code: 0, message: "Success! New product parent, "+productParent.name+" has been added."};
     //Query to determine if the product parent name is a duplicate or not
-    data = await db.query("SELECT * FROM invoice.product_parent WHERE product_parent_name = ?", [productParent.name]);
+    data = await db.query("SELECT * FROM product_parent WHERE product_parent_name = ?", [productParent.name]);
     if (data.length==0) {
-        data = await db.query("INSERT INTO invoice.product_parent (product_parent_name, product_parent_desc) VALUES (?, ?)", [productParent.name, productParent.description]);
+        data = await db.query("INSERT INTO product_parent (product_parent_name, product_parent_desc) VALUES (?, ?)", [productParent.name, productParent.description]);
     }
     else {
         //the query did not return any results
         meta.message = "Failure: Duplicate product parent.";
+        meta.return_code = 1;
     }
     //}
 
@@ -25,13 +26,14 @@ ProductParent.Insert = async function insertproductparent(productParent) {
 }
 
 ProductParent.SelectAll = async function selectallproductparent() {
-    const data = await db.query("SELECT * FROM invoice.product_parent");
-    const meta = {message: "success"};
+    const data = await db.query("SELECT * FROM product_parent");
+    const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the product parent data
     if (data.length==0) {
       //the query did not return any results
       meta.message = "Error: Product parent not found";
+      meta.return_code = 1;
     }
     else {
       //do here if there are product parent data
@@ -44,13 +46,14 @@ ProductParent.SelectAll = async function selectallproductparent() {
 }
 
 ProductParent.SelectById = async function selectproductparentbyid(productParentId) {
-    const data = await db.query("SELECT * FROM invoice.product_parent WHERE product_parent_id = ?", [productParentId]);
-    const meta = {message: "success"};
+    const data = await db.query("SELECT * FROM product_parent WHERE product_parent_id = ?", [productParentId]);
+    const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the product parent
     if (data.length==0) {
       //the query did not return any results
       meta.message = "Error: Product parent not found";
+      meta.return_code = 1;
     }
     else {
       //do here if there are product parent
@@ -63,13 +66,14 @@ ProductParent.SelectById = async function selectproductparentbyid(productParentI
 }
 
 ProductParent.SelectByName = async function selectproductparentbyname(productParentName) {
-    const data = await db.query("SELECT * FROM invoice.product_parent WHERE product_parent_name = ?", [productParentName]);
-    const meta = {message: "success"};
+    const data = await db.query("SELECT * FROM product_parent WHERE product_parent_name = ?", [productParentName]);
+    const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the product parent
     if (data.length==0) {
       //the query did not return any results
       meta.message = "Error: Product parent not found";
+      meta.return_code = 1;
     }
     else {
       //do here if there are product parent
@@ -82,7 +86,7 @@ ProductParent.SelectByName = async function selectproductparentbyname(productPar
 }
 
 ProductParent.UpdateById = async function updateproductparentbyid(productParentId, productParent) {
-    var queryTxt = "UPDATE invoice.product_parent SET ";
+    var queryTxt = "UPDATE product_parent SET ";
     var setName = "";
     var setDesc = "";
     if (productParent.name) {
@@ -95,12 +99,13 @@ ProductParent.UpdateById = async function updateproductparentbyid(productParentI
     console.log(queryTxt+setName+setDesc+" WHERE product_parent_id = ?");
     
     const data = await db.query(queryTxt+setName+setDesc+" WHERE product_parent_id = ?", [productParentId]);
-    const meta = {message: "success"};
+    const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the product parent
     if (data.length==0) {
       //the query did not return any results
       meta.message = "Error: Product parent not found found";
+      meta.return_code = 1;
     }
     else {
       //do here if there are product parent

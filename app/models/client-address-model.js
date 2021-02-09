@@ -46,7 +46,7 @@ ClientAddress.Insert = async function insertclientaddress(clientAddress) {
                     meta = result.meta;
                 }
                 else {
-                    data = await db.query("INSERT INTO invoice.client_address (client_id, address1, address2, city_id, province_id, country_id, postal_code) VALUES (?, ?, ?, ?, ?, ?, ?)", [clientAddress.clientId, clientAddress.address1, clientAddress.address2, clientAddress.cityId, clientAddress.provinceId, clientAddress.countryId, clientAddress.postalCode]);
+                    data = await db.query("INSERT INTO client_address (client_id, address1, address2, city_id, province_id, country_id, postal_code) VALUES (?, ?, ?, ?, ?, ?, ?)", [clientAddress.clientId, clientAddress.address1, clientAddress.address2, clientAddress.cityId, clientAddress.provinceId, clientAddress.countryId, clientAddress.postalCode]);
                 }
             }
         }
@@ -59,7 +59,7 @@ ClientAddress.Insert = async function insertclientaddress(clientAddress) {
 }
 
 ClientAddress.SelectAll = async function selectallclient() {
-    const data = await db.query("SELECT * FROM invoice.client_address ca JOIN invoice.client c ON ca.client_id=c.client_id JOIN invoice.city ct ON ct.city_id=ca.city_id JOIN invoice.province p ON p.province_id=ca.province_id JOIN invoice.country cn ON cn.country_id=ca.country_id");
+    const data = await db.query("SELECT * FROM client_address ca JOIN client c ON ca.client_id=c.client_id JOIN city ct ON ct.city_id=ca.city_id JOIN province p ON p.province_id=ca.province_id JOIN country cn ON cn.country_id=ca.country_id");
     const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client address data
@@ -79,7 +79,7 @@ ClientAddress.SelectAll = async function selectallclient() {
 }
 
 ClientAddress.SelectById = async function selectclientaddressbyid(clientAddressId) {
-    const data = await db.query("SELECT * FROM invoice.client_address ca JOIN invoice.client c ON ca.client_id=c.client_id JOIN invoice.city ct ON ct.city_id=ca.city_id JOIN invoice.province p ON p.province_id=ca.province_id JOIN invoice.country cn ON cn.country_id=ca.country_id WHERE ca.client_address_id = ?", [clientAddressId]);
+    const data = await db.query("SELECT * FROM client_address ca JOIN client c ON ca.client_id=c.client_id JOIN city ct ON ct.city_id=ca.city_id JOIN province p ON p.province_id=ca.province_id JOIN country cn ON cn.country_id=ca.country_id WHERE ca.client_address_id = ?", [clientAddressId]);
     const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client address data
@@ -99,7 +99,7 @@ ClientAddress.SelectById = async function selectclientaddressbyid(clientAddressI
 }
 
 ClientAddress.SelectByClientId = async function selectclientaddressbyclientid(clientId) {
-    const data = await db.query("SELECT * FROM invoice.client_address ca JOIN invoice.client c ON ca.client_id=c.client_id JOIN invoice.city ct ON ct.city_id=ca.city_id JOIN invoice.province p ON p.province_id=ca.province_id JOIN invoice.country cn ON cn.country_id=ca.country_id WHERE ca.client_id = ?", [clientId]);
+    const data = await db.query("SELECT * FROM client_address ca JOIN client c ON ca.client_id=c.client_id JOIN city ct ON ct.city_id=ca.city_id JOIN province p ON p.province_id=ca.province_id JOIN country cn ON cn.country_id=ca.country_id WHERE ca.client_id = ?", [clientId]);
     const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client address data
@@ -119,7 +119,7 @@ ClientAddress.SelectByClientId = async function selectclientaddressbyclientid(cl
 }
 
 ClientAddress.SelectByClientName = async function selectclientaddressbyclientname(clientName) {
-    const data = await db.query("SELECT * FROM invoice.client_address ca JOIN invoice.client c ON ca.client_id=c.client_id JOIN invoice.city ct ON ct.city_id=ca.city_id JOIN invoice.province p ON p.province_id=ca.province_id JOIN invoice.country cn ON cn.country_id=ca.country_id WHERE c.client_name = ?", [clientName]);
+    const data = await db.query("SELECT * FROM client_address ca JOIN client c ON ca.client_id=c.client_id JOIN city ct ON ct.city_id=ca.city_id JOIN province p ON p.province_id=ca.province_id JOIN country cn ON cn.country_id=ca.country_id WHERE c.client_name = ?", [clientName]);
     const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client address data
@@ -139,7 +139,7 @@ ClientAddress.SelectByClientName = async function selectclientaddressbyclientnam
 }
 
 ClientAddress.SelectByCityId = async function selectclientaddressbycityid(cityId) {
-    const data = await db.query("SELECT * FROM invoice.client_address ca JOIN invoice.client c ON ca.client_id=c.client_id JOIN invoice.city ct ON ct.city_id=ca.city_id JOIN invoice.province p ON p.province_id=ca.province_id JOIN invoice.country cn ON cn.country_id=ca.country_id WHERE ca.city_id = ?", [cityId]);
+    const data = await db.query("SELECT * FROM client_address ca JOIN client c ON ca.client_id=c.client_id JOIN city ct ON ct.city_id=ca.city_id JOIN province p ON p.province_id=ca.province_id JOIN country cn ON cn.country_id=ca.country_id WHERE ca.city_id = ?", [cityId]);
     const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client address data
@@ -159,7 +159,7 @@ ClientAddress.SelectByCityId = async function selectclientaddressbycityid(cityId
 }
 
 ClientAddress.SelectByCityName = async function selectclientaddressbycityname(cityName) {
-    const data = await db.query("SELECT * FROM invoice.client_address ca JOIN invoice.client c ON ca.client_id=c.client_id JOIN invoice.city ct ON ct.city_id=ca.city_id JOIN invoice.province p ON p.province_id=ca.province_id JOIN invoice.country cn ON cn.country_id=ca.country_id WHERE ct.city_name = ?", [cityName]);
+    const data = await db.query("SELECT * FROM client_address ca JOIN client c ON ca.client_id=c.client_id JOIN city ct ON ct.city_id=ca.city_id JOIN province p ON p.province_id=ca.province_id JOIN country cn ON cn.country_id=ca.country_id WHERE ct.city_name = ?", [cityName]);
     const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client address data
@@ -179,7 +179,7 @@ ClientAddress.SelectByCityName = async function selectclientaddressbycityname(ci
 }
 
 ClientAddress.SelectByProvinceId = async function selectclientaddressbyprovinceid(provinceId) {
-    const data = await db.query("SELECT * FROM invoice.client_address ca JOIN invoice.client c ON ca.client_id=c.client_id JOIN invoice.city ct ON ct.city_id=ca.city_id JOIN invoice.province p ON p.province_id=ca.province_id JOIN invoice.country cn ON cn.country_id=ca.country_id WHERE ca.province_id = ?", [provinceId]);
+    const data = await db.query("SELECT * FROM client_address ca JOIN client c ON ca.client_id=c.client_id JOIN city ct ON ct.city_id=ca.city_id JOIN province p ON p.province_id=ca.province_id JOIN country cn ON cn.country_id=ca.country_id WHERE ca.province_id = ?", [provinceId]);
     const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client address data
@@ -199,7 +199,7 @@ ClientAddress.SelectByProvinceId = async function selectclientaddressbyprovincei
 }
 
 ClientAddress.SelectByProvinceName = async function selectclientaddressbyprovincename(provinceName) {
-    const data = await db.query("SELECT * FROM invoice.client_address ca JOIN invoice.client c ON ca.client_id=c.client_id JOIN invoice.city ct ON ct.city_id=ca.city_id JOIN invoice.province p ON p.province_id=ca.province_id JOIN invoice.country cn ON cn.country_id=ca.country_id WHERE p.province_name = ?", [provinceName]);
+    const data = await db.query("SELECT * FROM client_address ca JOIN client c ON ca.client_id=c.client_id JOIN city ct ON ct.city_id=ca.city_id JOIN province p ON p.province_id=ca.province_id JOIN country cn ON cn.country_id=ca.country_id WHERE p.province_name = ?", [provinceName]);
     const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client address data
@@ -219,7 +219,7 @@ ClientAddress.SelectByProvinceName = async function selectclientaddressbyprovinc
 }
 
 ClientAddress.SelectByCountryId = async function selectclientaddressbycountryid(countryId) {
-    const data = await db.query("SELECT * FROM invoice.client_address ca JOIN invoice.client c ON ca.client_id=c.client_id JOIN invoice.city ct ON ct.city_id=ca.city_id JOIN invoice.province p ON p.province_id=ca.province_id JOIN invoice.country cn ON cn.country_id=ca.country_id WHERE ca.country_id = ?", [countryId]);
+    const data = await db.query("SELECT * FROM client_address ca JOIN client c ON ca.client_id=c.client_id JOIN city ct ON ct.city_id=ca.city_id JOIN province p ON p.province_id=ca.province_id JOIN country cn ON cn.country_id=ca.country_id WHERE ca.country_id = ?", [countryId]);
     const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client address data
@@ -239,7 +239,7 @@ ClientAddress.SelectByCountryId = async function selectclientaddressbycountryid(
 }
 
 ClientAddress.SelectByCountryName = async function selectclientaddressbycountryname(countryName) {
-    const data = await db.query("SELECT * FROM invoice.client_address ca JOIN invoice.client c ON ca.client_id=c.client_id JOIN invoice.city ct ON ct.city_id=ca.city_id JOIN invoice.province p ON p.province_id=ca.province_id JOIN invoice.country cn ON cn.country_id=ca.country_id WHERE cn.country_name = ?", [countryName]);
+    const data = await db.query("SELECT * FROM client_address ca JOIN client c ON ca.client_id=c.client_id JOIN city ct ON ct.city_id=ca.city_id JOIN province p ON p.province_id=ca.province_id JOIN country cn ON cn.country_id=ca.country_id WHERE cn.country_name = ?", [countryName]);
     const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the client address data
@@ -259,7 +259,7 @@ ClientAddress.SelectByCountryName = async function selectclientaddressbycountryn
 }
 
 ClientAddress.UpdateById = async function updateclientaddressbyid(clientAddressId, clientAddress) {
-    var queryTxt = "UPDATE invoice.client_address SET ";
+    var queryTxt = "UPDATE client_address SET ";
     var setFields = "";
     if (clientAddress.clientId) {
         setFields = "client_id = "+db.escape(clientAddress.clientId);

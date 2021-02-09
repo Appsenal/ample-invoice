@@ -173,7 +173,7 @@ exports.EditById = async function(req, res, next) {
         res.json(await ClientAddress.UpdateById(req.params.clientAddressId, clientAddress));
         console.log("Updated client address id "+req.params.clientAddressId);
     } catch (err) {
-        console.error('Error while updating the client addtess with client address id '+req.params.clientAddressId, err.message);
+        console.error('Error while updating the client address with client address id '+req.params.clientAddressId, err.message);
         res.json({message: "Failed: Error while updating the client address with client address id "+req.params.clientAddressId});
         next(err);
     }
