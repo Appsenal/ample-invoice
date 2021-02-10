@@ -4,7 +4,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./app/routes/index');
-//const worldRouter = require('./routes/world');
 const clientRouter = require('./app/routes/client');
 const countryRouter = require('./app/routes/country');
 const provinceRouter = require('./app/routes/province');
@@ -16,6 +15,7 @@ const productParentRouter = require('./app/routes/product-parent');
 const clientAddressRouter = require('./app/routes/client-address');
 const productRouter = require('./app/routes/product');
 const productStatusLinkRouter = require('./app/routes/product-status-link');
+const invoiceRouter = require('./app/routes/invoice');
 
 const app = express();
 
@@ -38,5 +38,6 @@ app.use('/product-parents', productParentRouter);
 app.use('/client-address', clientAddressRouter);
 app.use('/products', productRouter);
 app.use('/product-status-links', productStatusLinkRouter);
+app.use('/invoices', invoiceRouter);
 
 module.exports = app;

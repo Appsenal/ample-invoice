@@ -96,7 +96,7 @@ exports.GetByProductStatusName = async function(req, res, next) {
     }
 };
 
-// Update a client address identified by the client addtess Id in the request
+// Update a product status link identified by the product status Id in the request
 exports.EditById = async function(req, res, next) {
     // Validate request
     if (!req.body) {

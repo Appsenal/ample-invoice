@@ -8,6 +8,7 @@ const ProductStatusLink = function(productStatusLink) {
     this.effectiveDate = productStatusLink.effectiveDate;
 };
 
+//add the product status link details to the database
 ProductStatusLink.Insert = async function insertproductstatuslink(productStatusLink) {
     var meta = {return_code: 0, message: "Success! New product status link has been added."};
     var data = [];
@@ -38,6 +39,7 @@ ProductStatusLink.Insert = async function insertproductstatuslink(productStatusL
     }
 }
 
+//select all product status link from the database
 ProductStatusLink.SelectAll = async function selectallproductstatuslink() {
     const data = await db.query("SELECT * FROM product_status_link psl JOIN product p ON psl.product_id=p.product_id JOIN product_status ps ON ps.product_status_id=psl.product_status_id");
     const meta = {return_code: 0, message: "success"};
@@ -58,6 +60,7 @@ ProductStatusLink.SelectAll = async function selectallproductstatuslink() {
     }
 }
 
+//select all product status link by Id from the database
 ProductStatusLink.SelectById = async function selectproductstatuslinkbyid(productStatusLinkId) {
     const data = await db.query("SELECT * FROM product_status_link psl JOIN product p ON psl.product_id=p.product_id JOIN product_status ps ON ps.product_status_id=psl.product_status_id WHERE psl.product_status_link_id = ?", [productStatusLinkId]);
     const meta = {return_code: 0, message: "success"};
@@ -78,6 +81,7 @@ ProductStatusLink.SelectById = async function selectproductstatuslinkbyid(produc
     }
   }
 
+//select all product status link by product Id from the database
 ProductStatusLink.SelectByProductId = async function selectproductstatuslinkbyproductid(productId) {
     const data = await db.query("SELECT * FROM product_status_link psl JOIN product p ON psl.product_id=p.product_id JOIN product_status ps ON ps.product_status_id=psl.product_status_id WHERE psl.product_id = ?", [productId]);
     const meta = {return_code: 0, message: "success"};
@@ -98,6 +102,7 @@ ProductStatusLink.SelectByProductId = async function selectproductstatuslinkbypr
     }
   }
 
+  //select all product status link by product name from the database
   ProductStatusLink.SelectByProductName = async function selectproductstatuslinkbyproductname(productName) {
     const data = await db.query("SELECT * FROM product_status_link psl JOIN product p ON psl.product_id=p.product_id JOIN product_status ps ON ps.product_status_id=psl.product_status_id WHERE p.product_name = ?", [productName]);
     const meta = {return_code: 0, message: "success"};
@@ -118,6 +123,7 @@ ProductStatusLink.SelectByProductId = async function selectproductstatuslinkbypr
     }
   }
 
+  //select all product status link by product status Id from the database
 ProductStatusLink.SelectByProductStatusId = async function selectproductstatuslinkbyproductstatusid(productStatusId) {
     const data = await db.query("SELECT * FROM product_status_link psl JOIN product p ON psl.product_id=p.product_id JOIN product_status ps ON ps.product_status_id=psl.product_status_id WHERE psl.product_status_id = ?", [productStatusId]);
     const meta = {return_code: 0, message: "success"};
@@ -138,6 +144,7 @@ ProductStatusLink.SelectByProductStatusId = async function selectproductstatusli
     }
   }
 
+  //select all product status link by product status link from the database
   ProductStatusLink.SelectByProductStatusName = async function selectproductstatuslinkbyproductstatusName(productStatusName) {
     const data = await db.query("SELECT * FROM product_status_link psl JOIN product p ON psl.product_id=p.product_id JOIN product_status ps ON ps.product_status_id=psl.product_status_id WHERE ps.product_status_name = ?", [productStatusName]);
     const meta = {return_code: 0, message: "success"};
@@ -158,6 +165,7 @@ ProductStatusLink.SelectByProductStatusId = async function selectproductstatusli
     }
   }
 
+  //Update product status link by Id from the database
   ProductStatusLink.UpdateById = async function updateproductstatuslinkbyid(productStatusLinkId, productStatusLink) {
     var queryTxt = "UPDATE product_status_link SET ";
     var setFields = "";
