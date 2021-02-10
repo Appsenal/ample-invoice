@@ -15,6 +15,7 @@ const productStatusRouter = require('./app/routes/product-status');
 const productParentRouter = require('./app/routes/product-parent');
 const clientAddressRouter = require('./app/routes/client-address');
 const productRouter = require('./app/routes/product');
+const productStatusLinkRouter = require('./app/routes/product-status-link');
 
 const app = express();
 
@@ -36,5 +37,6 @@ app.use('/product-status', productStatusRouter);
 app.use('/product-parents', productParentRouter);
 app.use('/client-address', clientAddressRouter);
 app.use('/products', productRouter);
+app.use('/product-status-links', productStatusLinkRouter);
 
 module.exports = app;

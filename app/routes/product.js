@@ -20,7 +20,7 @@ router.get("/parent-id/:productParentId", product.GetByParentId);
 // Retrieve a product with product parent name
 router.get("/parent-name/:productParentName", product.GetByParentName);
 
-// Update a client address with client address Id
+// Update a product with product Id
 router.put("/:productId", product.EditById);
 
   // Delete a Customer with customerId

@@ -92,7 +92,7 @@ exports.EditById = async function(req, res, next) {
     // Validate request
     if (!req.body) {
         res.status(400).send({
-        message: "Content can not be empty!"
+            return_code: 1, message: "Content can not be empty!"
         });
     }
 
@@ -100,7 +100,7 @@ exports.EditById = async function(req, res, next) {
     
     const productDesc = req.body.product_description === undefined ? "" : req.body.product_description;
 
-    // Add a product
+    // Setup a product
     const product = new Product({
         productParentId: req.body.product_parent_id,
         price: req.body.price,
@@ -114,7 +114,7 @@ exports.EditById = async function(req, res, next) {
         console.log("Updated product id "+req.params.productId);
     } catch (err) {
         console.error('Error while updating the product with product id '+req.params.productId, err.message);
-        res.json({message: "Failed: Error while updating the product with product id "+req.params.productId});
+        res.json({return_code: 1, message: "Failed: Error while updating the product with product id "+req.params.productId});
         next(err);
     }
 };

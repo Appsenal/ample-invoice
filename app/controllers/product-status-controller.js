@@ -5,7 +5,7 @@ exports.Create = async function(req, res, next) {
     // Validate request 
     if (!req.body) {
         res.status(400).send({
-        message: "Content can not be empty!"
+            return_code: 1, message: "Content can not be empty!"
         });
     }
 
@@ -22,7 +22,7 @@ exports.Create = async function(req, res, next) {
         console.log("Adding new product status "+productStatus.name);
     } catch (err) {
         console.error('Error while adding the product status ', err.message);
-        res.json({message: "Failed: Error while adding the product status"});
+        res.json({return_code: 1, message: "Failed: Error while adding the product status"});
         next(err);
     }
 };
@@ -33,7 +33,7 @@ exports.GetAll = async function(req, res, next) {
         res.json(await ProductStatus.SelectAll());
     } catch (err) {
         console.error('Error while getting the product status', err.message);
-        res.json({message: "Failed: Error while getting the product status. "+err.message});
+        res.json({return_code: 1, message: "Failed: Error while getting the product status. "+err.message});
         next(err);
     }
 };
@@ -44,7 +44,7 @@ exports.GetById = async function(req, res, next) {
         res.json(await ProductStatus.SelectById(req.params.productStatusId));
     } catch (err) {
         console.error('Error while getting the product status with product status id '+req.params.productStatusId, err.message);
-        res.json({message: "Failed: Error while getting the product status with product status id "+req.params.productStatusId});
+        res.json({return_code: 1, message: "Failed: Error while getting the product status with product status id "+req.params.productStatusId});
         next(err);
     }
 };
@@ -55,7 +55,7 @@ exports.GetByName = async function(req, res, next) {
         res.json(await ProductStatus.SelectByName(req.params.productStatusName));
     } catch (err) {
         console.error('Error while getting the product status with product status name '+req.params.productStatusName, err.message);
-        res.json({message: "Failed: Error while getting the product status with product status name "+req.params.productStatusName});
+        res.json({return_code: 1, message: "Failed: Error while getting the product status with product status name "+req.params.productStatusName});
         next(err);
     }
 };
@@ -65,7 +65,7 @@ exports.EditById = async function(req, res, next) {
     // Validate request
     if (!req.body) {
         res.status(400).send({
-        message: "Content can not be empty!"
+            return_code: 1, message: "Content can not be empty!"
         });
     }
 
@@ -82,7 +82,7 @@ exports.EditById = async function(req, res, next) {
         console.log("Updated product status id "+req.params.productStatusId);
     } catch (err) {
         console.error('Error while updating the product status with product status id '+req.params.productStatusId, err.message);
-        res.json({message: "Failed: Error while updating the product status with product status id "+req.params.productStatusId});
+        res.json({return_code: 1, message: "Failed: Error while updating the product status with product status id "+req.params.productStatusId});
         next(err);
     }
 };

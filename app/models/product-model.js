@@ -163,7 +163,7 @@ Product.UpdateById = async function updateproductbyid(productId, product) {
   //check if the query is returning the client address data
   if (data.length==0) {
     //the query did not return any results
-    meta.message = "Error: Product not found found";
+    meta.message = "Error: Product not found";
     meta.return_code = 1;
   }
   else {

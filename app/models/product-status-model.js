@@ -6,7 +6,7 @@ const ProductStatus = function(productStatus) {
 };
 
 ProductStatus.Insert = async function insertproductstatus(productStatus) {
-    const meta = {message: "Success! New product status, "+productStatus.name+" has been added."};
+    const meta = {return_code: 0, message: "Success! New product status, "+productStatus.name+" has been added."};
     //Query to determine if the product status name is a duplicate or not
     data = await db.query("SELECT * FROM product_status WHERE product_status_name = ?", [productStatus.name]);
     if (data.length==0) {
@@ -14,6 +14,7 @@ ProductStatus.Insert = async function insertproductstatus(productStatus) {
     }
     else {
         //the query did not return any results
+        meta.return_code = 1;
         meta.message = "Failure: Duplicate product status.";
     }
     //}
@@ -26,11 +27,12 @@ ProductStatus.Insert = async function insertproductstatus(productStatus) {
 
 ProductStatus.SelectAll = async function selectallproductstatus() {
     const data = await db.query("SELECT * FROM product_status");
-    const meta = {message: "success"};
+    const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the product status data
     if (data.length==0) {
       //the query did not return any results
+      meta.return_code = 1;
       meta.message = "Error: Product status not found";
     }
     else {
@@ -45,11 +47,12 @@ ProductStatus.SelectAll = async function selectallproductstatus() {
 
 ProductStatus.SelectById = async function selectproductstatusbyid(productStatusId) {
     const data = await db.query("SELECT * FROM product_status WHERE product_status_id = ?", [productStatusId]);
-    const meta = {message: "success"};
+    const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the product status
     if (data.length==0) {
       //the query did not return any results
+      meta.return_code = 1;
       meta.message = "Error: Product status not found";
     }
     else {
@@ -64,11 +67,12 @@ ProductStatus.SelectById = async function selectproductstatusbyid(productStatusI
 
 ProductStatus.SelectByName = async function selectproductstatusbyname(productStatusName) {
     const data = await db.query("SELECT * FROM product_status WHERE product_status_name = ?", [productStatusName]);
-    const meta = {message: "success"};
+    const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the product status
     if (data.length==0) {
       //the query did not return any results
+      meta.return_code = 1;
       meta.message = "Error: Product status not found";
     }
     else {
@@ -95,11 +99,12 @@ ProductStatus.UpdateById = async function updateproductstatusbyid(productStatusI
     console.log(queryTxt+setName+setDesc+" WHERE product_status_id = ?");
     
     const data = await db.query(queryTxt+setName+setDesc+" WHERE product_status_id = ?", [productStatusId]);
-    const meta = {message: "success"};
+    const meta = {return_code: 0, message: "success"};
   
     //check if the query is returning the product status
     if (data.length==0) {
       //the query did not return any results
+      meta.return_code = 1;
       meta.message = "Error: Product status not found found";
     }
     else {
