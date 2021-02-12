@@ -38,14 +38,14 @@ Invoice.SelectAll = async function selectallinvoices() {
     const data = await db.query("SELECT * FROM invoice i JOIN client c ON i.client_id=c.client_id");
     const meta = {return_code: 0, message: "success"};
   
-    //check if the query is returning the product data
+    //check if the query is returning the invoice data
     if (data.length==0) {
       //the query did not return any results
       meta.message = "Error: Invoice not found";
       meta.return_code = 1;
     }
     else {
-      //do here if there are product data
+      //do here if there are invoice data
     }
   
     return {
@@ -66,7 +66,7 @@ Invoice.SelectById = async function selectinvoicebyid(invoiceId) {
       meta.return_code = 1;
     }
     else {
-      //do here if there are client address data
+      //do here if there are invoice data
     }
   
     return {
@@ -87,7 +87,7 @@ Invoice.SelectByClientId = async function selectinvoicebyclientid(clientId) {
       meta.return_code = 1;
     }
     else {
-      //do here if there are client address data
+      //do here if there are invoice data
     }
   
     return {
@@ -108,7 +108,7 @@ Invoice.SelectByClientName = async function selectinvoicebyclientname(clientName
       meta.return_code = 1;
     }
     else {
-      //do here if there are client address data
+      //do here if there are invoice data
     }
   
     return {
@@ -129,7 +129,7 @@ Invoice.SelectByInvoiceDate = async function selectinvoicebyinvoicedate(invoiceD
       meta.return_code = 1;
     }
     else {
-      //do here if there are client address data
+      //do here if there are invoice data
     }
   
     return {
@@ -150,7 +150,7 @@ Invoice.SelectByPaymentDate = async function selectinvoicebypaymentdate(paymentD
       meta.return_code = 1;
     }
     else {
-      //do here if there are client address data
+      //do here if there are invoice data
     }
   
     return {
@@ -159,7 +159,7 @@ Invoice.SelectByPaymentDate = async function selectinvoicebypaymentdate(paymentD
     }
 }
 
-//Update product status link by Id from the database
+//Update invoice by Id from the database
 Invoice.UpdateById = async function updateinvoicebyid(invoiceId, invoice) {
     var queryTxt = "UPDATE invoice SET ";
     var setFields = "";
@@ -184,14 +184,14 @@ Invoice.UpdateById = async function updateinvoicebyid(invoiceId, invoice) {
     const data = await db.query(queryTxt+setFields+" WHERE invoice_id = ?", [invoiceId]);
     const meta = {return_code: 0, message: "success"};
   
-    //check if the query is returning the client address data
+    //check if the query is returning the invoice data
     if (data.length==0) {
       //the query did not return any results
       meta.message = "Error: Invoice not found";
       meta.return_code = 1;
     }
     else {
-      //do here if there are client address data
+      //do here if there are invoice data
     }
   
     return {

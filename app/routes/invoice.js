@@ -8,8 +8,8 @@ router.post("/", invoice.Create);
 // Retrieve all invoices
 router.get("/", invoice.GetAll);
   
-// Retrieve a invoie by invoice Id
-router.get("/id/:invoiceId", invoice.GetById);
+// Retrieve a invoice by invoice Id
+router.get("/:invoiceId", invoice.GetById);
 
 // Retrieve a invoice by client Id
 router.get("/client-id/:clientId", invoice.GetByClientId);

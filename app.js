@@ -16,6 +16,7 @@ const clientAddressRouter = require('./app/routes/client-address');
 const productRouter = require('./app/routes/product');
 const productStatusLinkRouter = require('./app/routes/product-status-link');
 const invoiceRouter = require('./app/routes/invoice');
+const invoiceProductRouter = require('./app/routes/invoice-product');
 
 const app = express();
 
@@ -39,5 +40,6 @@ app.use('/client-address', clientAddressRouter);
 app.use('/products', productRouter);
 app.use('/product-status-links', productStatusLinkRouter);
 app.use('/invoices', invoiceRouter);
+app.use('/invoice-products', invoiceProductRouter);
 
 module.exports = app;
